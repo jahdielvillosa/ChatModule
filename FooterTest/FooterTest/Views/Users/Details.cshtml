@@ -1,0 +1,58 @@
+﻿@model FooterTest.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contactNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contactNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usertype)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usertype)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

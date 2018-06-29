@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ChatModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ChatModelStoreContainer">
+    <EntitySet Name="Users" EntityType="ChatModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Chats" EntityType="ChatModel.Store.Chats" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Chatthreads" EntityType="ChatModel.Store.Chatthreads" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ChatChatthread" Association="ChatModel.Store.ChatChatthread">
+      <End Role="Chat" EntitySet="Chats" />
+      <End Role="Chatthread" EntitySet="Chatthreads" />
+    </AssociationSet>
+    <AssociationSet Name="UserChatthread" Association="ChatModel.Store.UserChatthread">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Chatthread" EntitySet="Chatthreads" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="lname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="usertype" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="contactNo" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Chats">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="remarks" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="lastUpdate" Type="datetime" Nullable="false" />
+    <Property Name="isRead" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Chatthreads">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="datetime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ChatId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ChatChatthread">
+    <End Role="Chat" Type="ChatModel.Store.Chats" Multiplicity="1" />
+    <End Role="Chatthread" Type="ChatModel.Store.Chatthreads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chat">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Chatthread">
+        <PropertyRef Name="ChatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserChatthread">
+    <End Role="User" Type="ChatModel.Store.Users" Multiplicity="1" />
+    <End Role="Chatthread" Type="ChatModel.Store.Chatthreads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Chatthread">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ChatModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ChatModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="ChatModel.User" />
+          <EntitySet Name="Chats" EntityType="ChatModel.Chat" />
+          <EntitySet Name="Chatthreads" EntityType="ChatModel.Chatthread" />
+          <AssociationSet Name="ChatChatthread" Association="ChatModel.ChatChatthread">
+            <End Role="Chat" EntitySet="Chats" />
+            <End Role="Chatthread" EntitySet="Chatthreads" />
+          </AssociationSet>
+          <AssociationSet Name="UserChatthread" Association="ChatModel.UserChatthread">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Chatthread" EntitySet="Chatthreads" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fname" Type="String" Nullable="false" MaxLength="Max" ConcurrencyMode="None" Unicode="true" FixedLength="false" />
+          <Property Name="lname" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="usertype" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Chatthreads" Relationship="ChatModel.UserChatthread" FromRole="User" ToRole="Chatthread" />
+          <Property Name="contactNo" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="remarks" Nullable="false" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Chatthreads" Relationship="ChatModel.ChatChatthread" FromRole="Chat" ToRole="Chatthread" />
+          <Property Name="lastUpdate" Type="DateTime" Nullable="false" />
+          <Property Name="isRead" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Chatthread">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="message" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="datetime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Chat" Relationship="ChatModel.ChatChatthread" FromRole="Chatthread" ToRole="Chat" />
+          <Property Name="ChatId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="ChatModel.UserChatthread" FromRole="Chatthread" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="ChatChatthread">
+          <End Type="ChatModel.Chat" Role="Chat" Multiplicity="1" />
+          <End Type="ChatModel.Chatthread" Role="Chatthread" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chat">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chatthread">
+              <PropertyRef Name="ChatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserChatthread">
+          <End Type="ChatModel.User" Role="User" Multiplicity="1" />
+          <End Type="ChatModel.Chatthread" Role="Chatthread" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chatthread">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ChatModelStoreContainer" CdmEntityContainer="ChatModelContainer">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(ChatModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="fname" ColumnName="fname" />
+          <ScalarProperty Name="lname" ColumnName="lname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="usertype" ColumnName="usertype" />
+          <ScalarProperty Name="contactNo" ColumnName="contactNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Chats">
+      <EntityTypeMapping TypeName="IsTypeOf(ChatModel.Chat)">
+        <MappingFragment StoreEntitySet="Chats">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+          <ScalarProperty Name="isRead" ColumnName="isRead" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Chatthreads">
+      <EntityTypeMapping TypeName="IsTypeOf(ChatModel.Chatthread)">
+        <MappingFragment StoreEntitySet="Chatthreads">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+          <ScalarProperty Name="ChatId" ColumnName="ChatId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

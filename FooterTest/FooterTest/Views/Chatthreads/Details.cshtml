@@ -1,0 +1,50 @@
+﻿@model FooterTest.Models.Chatthread
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Chatthread</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.message)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.datetime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.datetime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Chat.remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chat.remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.fname)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

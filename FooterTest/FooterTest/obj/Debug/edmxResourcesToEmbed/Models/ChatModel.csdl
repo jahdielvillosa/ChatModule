@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ChatModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="ChatModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="ChatModel.User" />
+    <EntitySet Name="Chats" EntityType="ChatModel.Chat" />
+    <EntitySet Name="Chatthreads" EntityType="ChatModel.Chatthread" />
+    <AssociationSet Name="ChatChatthread" Association="ChatModel.ChatChatthread">
+      <End Role="Chat" EntitySet="Chats" />
+      <End Role="Chatthread" EntitySet="Chatthreads" />
+    </AssociationSet>
+    <AssociationSet Name="UserChatthread" Association="ChatModel.UserChatthread">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Chatthread" EntitySet="Chatthreads" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fname" Type="String" Nullable="false" MaxLength="Max" ConcurrencyMode="None" Unicode="true" FixedLength="false" />
+    <Property Name="lname" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="usertype" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Chatthreads" Relationship="ChatModel.UserChatthread" FromRole="User" ToRole="Chatthread" />
+    <Property Name="contactNo" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Chat">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+    <Property Name="remarks" Nullable="false" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Chatthreads" Relationship="ChatModel.ChatChatthread" FromRole="Chat" ToRole="Chatthread" />
+    <Property Name="lastUpdate" Type="DateTime" Nullable="false" />
+    <Property Name="isRead" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Chatthread">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="message" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="datetime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Chat" Relationship="ChatModel.ChatChatthread" FromRole="Chatthread" ToRole="Chat" />
+    <Property Name="ChatId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="ChatModel.UserChatthread" FromRole="Chatthread" ToRole="User" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="ChatChatthread">
+    <End Type="ChatModel.Chat" Role="Chat" Multiplicity="1" />
+    <End Type="ChatModel.Chatthread" Role="Chatthread" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chat">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Chatthread">
+        <PropertyRef Name="ChatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserChatthread">
+    <End Type="ChatModel.User" Role="User" Multiplicity="1" />
+    <End Type="ChatModel.Chatthread" Role="Chatthread" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Chatthread">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

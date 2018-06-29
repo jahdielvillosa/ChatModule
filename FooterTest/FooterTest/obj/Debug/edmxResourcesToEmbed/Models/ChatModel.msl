@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ChatModelStoreContainer" CdmEntityContainer="ChatModelContainer">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(ChatModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="fname" ColumnName="fname" />
+          <ScalarProperty Name="lname" ColumnName="lname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="usertype" ColumnName="usertype" />
+          <ScalarProperty Name="contactNo" ColumnName="contactNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Chats">
+      <EntityTypeMapping TypeName="IsTypeOf(ChatModel.Chat)">
+        <MappingFragment StoreEntitySet="Chats">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+          <ScalarProperty Name="isRead" ColumnName="isRead" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Chatthreads">
+      <EntityTypeMapping TypeName="IsTypeOf(ChatModel.Chatthread)">
+        <MappingFragment StoreEntitySet="Chatthreads">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="datetime" ColumnName="datetime" />
+          <ScalarProperty Name="ChatId" ColumnName="ChatId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

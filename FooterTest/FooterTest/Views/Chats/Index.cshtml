@@ -1,0 +1,90 @@
+﻿@model List<FooterTest.Models.ChatInfo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Client
+        </th>
+        <th>
+            Message
+        </th>
+        <th>
+            Last Update
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    if (item.isRead == true)
+    {
+        <tr style="color: gray; font-weight:normal;">
+            <td>
+                @Html.DisplayFor(modelItem => item.user)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dtsent)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+            <td>
+                <span class="btn btn-default" id="replyBtn" onclick="reply('@item.remarks')">Reply</span>
+            </td>
+        </tr>
+    }
+    else
+    {
+        <tr style="color: dodgerblue; font-weight:bolder;">
+            <td>
+                @Html.DisplayFor(modelItem => item.user)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dtsent)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+            <td>
+
+                <span class="btn btn-default" id="replyBtn" onclick="reply('@item.remarks')">Reply</span>
+            </td>
+        </tr>
+    }
+
+}
+    
+</table>
+
+<script>
+    function checkIfOnline(dtsent) {
+
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        var dateTime = date+' '+time;
+
+        
+    }
+</script>
+<script src="~/Scripts/chatModule.js"></script>

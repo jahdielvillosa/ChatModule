@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Website Chat</h1>
+    <p class="lead">Chat Support Sample Application</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2><span>@Html.ActionLink("Chat", "Index", "Chats")</span></h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="~/Chats">Learn more &raquo;</a></p>
+    </div>
+
+    <div class="col-md-4">
+        <h2><span>@Html.ActionLink("Chat Threads", "Index", "Chatthreads")</span></h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="~/Chats">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2> <span>@Html.ActionLink("Users", "Index", "Users")</span></h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="~/Users">Learn more &raquo;</a></p>
+        
+    </div>
+</div>
+
+<footer class="navbar navbar-inverse navbar-fixed-bottom" id="mobile-footer" >
+    <div class="container">
+        <ul class="nav navbar">
+            <li>
+                <a href="tel:+63 909-076-1575">
+                    <img src="~/Content/img/call.png" alt="Call" class="footer-img"> 
+                    <h4> Call </h4>
+                </a>
+            </li>
+            <li>
+                <a href="sms:+63 909-076-1575">
+                    <img src="~/Content/img/sms.png" alt="SMS" class="footer-img"> 
+                    <h4> SMS </h4>
+                </a>
+            </li>
+            <li>
+                <a href="mailto: realbreezedavao@gmail.com">
+                    <img src="~/Content/img/mail.png" alt="Mail" class="footer-img"> 
+                    <h4> Mail </h4>
+                </a>
+            </li>
+            <li>
+                <a onclick="openChat()">
+                    <img src="~/Content/img/chat.png" alt="Chat" class="footer-img"> 
+                    <h4> Chat </h4>
+                </a>
+            </li>
+        </ul>
+    </div>
+</footer>
+
+<script>
+    /**
+    *   Handles footer. Show Footer only when device is
+    *   mobile or screen width less than 600 pixels.
+    */
+    function toggleScreen() {
+        var f = document.getElementById("mobile-footer");
+        var screenwidth = document.documentElement.clientWidth;
+        var chatbox = document.getElementById("chatbox");
+
+        if (screenwidth < 600) {
+            alert("MOBILE DEVICE!!");
+            f.style.display = "block";
+            chatbox.style.marginBottom = "100px";
+        }
+        else {
+            chatbox.style.bottom = "0px";
+            f.style.display = "none";
+        }
+    }
+</script>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChatModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ChatModelStoreContainer">
+    <EntitySet Name="Users" EntityType="ChatModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Chats" EntityType="ChatModel.Store.Chats" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Chatthreads" EntityType="ChatModel.Store.Chatthreads" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ChatChatthread" Association="ChatModel.Store.ChatChatthread">
+      <End Role="Chat" EntitySet="Chats" />
+      <End Role="Chatthread" EntitySet="Chatthreads" />
+    </AssociationSet>
+    <AssociationSet Name="UserChatthread" Association="ChatModel.Store.UserChatthread">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Chatthread" EntitySet="Chatthreads" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="lname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="usertype" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="contactNo" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Chats">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="remarks" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="lastUpdate" Type="datetime" Nullable="false" />
+    <Property Name="isRead" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Chatthreads">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="datetime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ChatId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ChatChatthread">
+    <End Role="Chat" Type="ChatModel.Store.Chats" Multiplicity="1" />
+    <End Role="Chatthread" Type="ChatModel.Store.Chatthreads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chat">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Chatthread">
+        <PropertyRef Name="ChatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserChatthread">
+    <End Role="User" Type="ChatModel.Store.Users" Multiplicity="1" />
+    <End Role="Chatthread" Type="ChatModel.Store.Chatthreads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Chatthread">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
