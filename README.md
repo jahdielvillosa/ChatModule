@@ -1,7 +1,7 @@
 # ChatModule
 Chat module using Javascript in ASP.Net. 
 
-Chat module is integrated on a ASP.Net Website with MSSQL database. The chat module is written in javscript, CSS, HTML. A desktop application project is also created to compliment the module. See ChatApp in my respositories.
+Chat module is integrated on a ASP.Net Website with MSSQL database. The chat module is written in javscript, CSS, HTML. A desktop application project is also created to compliment the module. See <a href="https://github.com/jahdielvillosa/ChatApp" > ChatApp </a> in my respositories.
 
 To Use:
   1. Open the Project using Visual Studio 2015 or higher.
