@@ -3,7 +3,7 @@
 
 Chat module is integrated on a ASP.Net Website with MSSQL database. The chat module is written in javscript, CSS, HTML. A desktop application project is also created to compliment the module. See <a href="https://github.com/jahdielvillosa/ChatApp" > ChatApp </a> in my respositories.
 
-<h2>How To Use<h2>
+<h2>How To Use</h2>
   1. Open the Project using Visual Studio 2015 or higher.
   2. Open the sql file of the database. Navigate to Solution 'FooterTest' > FooterTest > Models > ChatModel.edmx.sql
   3. Click the connect Button
